@@ -1,28 +1,35 @@
-# The name of pipeline
-name: CI Pinelines
+# The name of a pipeline
+name: CI Pipelines
 
-# Active pipeline when `push` on branch main
+# Active pipeline when having `push` action on branch main
 on:
   push:
     branches:
       - main
 
-# 
+# The jobs will run
 jobs:
+  # The name of a job
   build-and-test:
+    # The job will be run on a virtual machine
     runs-on: ubuntu-latest
 
+    # The works will perform
     steps:
+      # Copy all source code from repo to the virtual machine to run
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4         # Use an available action
 
+      # Install Node.js on VM to run the project
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4       # Use an available action
         with:
-          node-version: 'latest'
+          node-version: 'latest'          # Use the latest version of Node.js
 
+      # Install libraries or dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm install                  # Run command
 
+      # Run the test command to check unit tests.
       - name: Run test
         run: npm test
